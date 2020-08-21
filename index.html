@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>💲Expense App💲</title>
+
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-firestore.js"></script>
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+   https://firebase.google.com/docs/web/setup#available-libraries -->
+
+  <!-- materialize icons, css & js -->
+  <link type="text/css" href="/css/materialize.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link type="text/css" href="/css/styles.css" rel="stylesheet">
+  <script type="text/javascript" src="/js/materialize.min.js"></script>
+  <link rel="manifest" href="/manifest.json">
+
+  <link rel="favicon" href="/img/favicon.ico">
+  <!-- ios support -->
+  <link rel="apple-touch-icon" href="/img/icons/icon-96x96.png">
+  <meta name="apple-mobile-web-app-status-bar" content="#FFE1C4">
+  <meta name="theme-color" content="#FFE1C4">
+
+
+</head>
+
+<body class="grey lighten-4">
+
+  <!-- top nav -->
+  <nav class="z-depth-0">
+    <div class="nav-wrapper container">
+      <a href="/">Max's <span>Expenses</span></a>
+
+      <span class="right grey-text text-darken-1">
+        <i class="material-icons sidenav-trigger" data-target="side-menu">menu</i>
+
+      </span>
+    </div>
+  </nav>
+
+  <!-- side nav -->
+  <ul id="side-menu" class="sidenav side-menu">
+    <li><a class="subheader">Expenses</a></li>
+    <li><a href="/" class="waves-effect">Home</a></li>
+    <li><a href="/testMultiForm.html" class="waves-effect">MultiSelect</a></li>
+    <li><a href="/pages/about.html" class="waves-effect">About</a></li>
+    <li>
+      <div class="divider"></div>
+    </li>
+    <li><a href="/pages/contact.html" class="waves-effect">
+        <i class="material-icons">mail_outline</i>Contact</a>
+    </li>
+  </ul>
+
+  <!-- expenses -->
+  <!-- Buttons Left- Add transaction/ Middle - Select monthlyforecast items / Right- Add new forecast item -->
+  <div class="center">
+    <a class="btn-floating btn-small add-btn sidenav-trigger" data-target="side-form">
+      <i class="material-icons">add</i>
+    </a>
+
+    <a class="btn-floating btn-small teal lighten-2  sidenav-trigger" data-target="side-form-F1">
+      <i class="material-icons">storage</i>
+    </a>
+    <a class="btn-floating btn-small teal lighten-2  sidenav-trigger" data-target="side-form-F2">
+      <i class="material-icons">create</i>
+    </a>
+    <a class="btn-floating btn-small teal lighten-2  sidenav-trigger" data-target="side-form-F3">
+      <i class="material-icons">replay</i>
+    </a>
+
+  </div>
+  <hr>
+  <div class="expenses container grey-text text-darken-1">
+  </div>
+
+
+
+  <!-- add expenses side nav             -->
+  <div id="side-form" class="sidenav side-form">
+    <form class="add-expense container section">
+      <h6>New Expense</h6>
+      <div class="divider"></div>
+      <div class="input-field center">
+        <button class="btn-small add-btn">Add Expense</button>
+      </div>
+      <div class="input-field">
+        <input placeholder=50 id="sum" type="number" min="0" step=".01" required class="validate">
+        <!-- type="number"  min="0" step=".01"class="validate" chaged to text??/ required -->
+        <label for="sum">Expense Sum</label>
+      </div>
+      <div class="1">
+        <label>Shop Select</label>
+        <select id="shop" class="browser-default">
+          <option value="" disabled selected>Choose Shop</option>
+          <option value="Other">Other</option>
+          <option value="Pak'n'Save-🛒">Pak'n'Save-🛒</option>
+          <option value="Paua Electricity-💡">Paua Electricity-💡</option>
+          <option value="Warehouse Mobile-📱">Warehouse Mobile-📱</option>
+          <option value="Stuff Fibre-💻">Stuff Fibre-💻</option>
+          <option value="Vege Market-🥕">Vege Market-🥕</option>
+          <option value="The Warehouse-🛍️">The Warehouse-🛍️</option>
+          <option value="Countdown-🛒 ">Countdown-🛒 </option>
+          <option value="New World-🛒">New World-🛒</option>
+          <option value="Uncle Bills-🛍️">Uncle Bills-🛍️</option>
+          <option value="123Mart-🛍️">123Mart-🛍️</option>
+          <option value="Life Pharmacy-⚕️">Life Pharmacy-⚕️</option>
+          <option value="Hataitai Medical-⚕️">Hataitai Medical-⚕️</option>
+          <option value="Contabo-💻">Contabo-💻</option>
+          <option value="ASB-💰">ASB-💰</option>
+          <option value="Moore Wilson-🛒">Moore Wilson-🛒</option>
+          <option value="Asian food kilbirnie-🛒">Asian food kilbirnie-🛒</option>
+          <option value="Brew House-🍺">Brew House-</option>
+          <option value="BP Connect-⛽">BP Connect</option>
+          <option value="Placemakers-🔨">Placemakers-🔨</option>
+          <option value="Bunnings-🔨">Bunnings-🔨</option>
+          <option value="WCC-🌆 ">WCC-🌆 </option>
+          <option value="Scooterazzi-🏍️">Scooterazzi-🏍️</option>
+
+        </select>
+      </div>
+      <div class="1">
+        <label>Category Select</label>
+        <select id="category" class="browser-default" required>
+          <option value="" disabled selected>Choose Category</option>
+          <option value="Food-🍲">Food-🍲</option>
+          <option value="House-🏠">House-🏠</option>
+          <option value="Tech-💾">Tech-💾</option>
+          <option value="Health-⚕️">Health-⚕️</option>
+          <option value="Vehicle-🚙">Vehicle-🚙</option>
+          <option value="Other-🏺">Other-🏺</option>
+        </select>
+      </div>
+      <div class="1">
+        <label>Account Select</label>
+        <select id="account" class="browser-default">
+          <option value="" disabled selected>Choose Account</option>
+          <option value="Visa 1-💳">Visa 1-💳</option>
+          <option value="Orbit-💰">Orbit-💰</option>
+          <option value="Visa 2-💳">Visa 2-💳</option>
+          <option value="Cash-💸">Cash-💸</option>
+        </select>
+      </div>
+      <div class="1">
+        <label>Billable Select</label>
+        <select id="billable" class="browser-default">
+          <option value="" disabled selected>Choose Billing</option>
+          <option value="No-👎">No-👎</option>
+          <option value="Part-👐">Part-👐</option>
+          <option value="Yes-👍">Yes👍</option>
+          <option value="House-🏡">House-🏡</option>
+        </select>
+      </div>
+
+      <div class="input-field">
+        <input placeholder="e.g. shopping" id="comment" type="text" class="validate">
+        <label for="comment">Comment on Expenses</label>
+      </div>
+
+    </form>
+  </div>
+
+  <!-- update expenses side nav    -->
+  <div id="side-form1" class="sidenav side-form1">
+    <form class="update-expense container section">
+      <h6>Update Expense</h6>
+      <div class="divider"></div>
+      <div class="input-field center">
+        <button class="btn-small add-btn">Update Expense</button>
+      </div>
+      <div class="input-field">
+        <input placeholder=50 id="sum1" type="number" min="0" step=".01" required class="validate">
+        <!-- update expenses side nav   required  -->
+        <label for="sum1">Sum</label>
+      </div>
+
+      <div class="1">
+        <label>Shop Select</label>
+        <select id="shop1" class="browser-default">
+          <option value="" disabled selected>Choose Shop</option>
+          <option value="Other">Other</option>
+          <option value="Pak'n'Save-🛒">Pak'n'Save-🛒</option>
+          <option value="Paua Electricity-💡">Paua Electricity-💡</option>
+          <option value="Warehouse Mobile-📱">Warehouse Mobile-📱</option>
+          <option value="Stuff Fibre-💻">Stuff Fibre-💻</option>
+          <option value="Vege Market-🥕">Vege Market-🥕</option>
+          <option value="The Warehouse-🛍️">The Warehouse-🛍️</option>
+          <option value="Countdown-🛒 ">Countdown-🛒 </option>
+          <option value="New World-🛒">New World-🛒</option>
+          <option value="Uncle Bills-🛍️">Uncle Bills-🛍️</option>
+          <option value="123Mart-🛍️">123Mart-🛍️</option>
+          <option value="Life Pharmacy-⚕️">Life Pharmacy-⚕️</option>
+          <option value="Hataitai Medical-⚕️">Hataitai Medical-⚕️</option>
+          <option value="Contabo-💻">Contabo-💻</option>
+          <option value="ASB-💰">ASB-💰</option>
+          <option value="Moore Wilson-🛒">Moore Wilson-🛒</option>
+          <option value="Asian food kilbirnie-🛒">Asian food kilbirnie-🛒</option>
+          <option value="Brew House-🍺">Brew House-</option>
+          <option value="BP Connect-⛽">BP Connect</option>
+          <option value="Placemakers-🔨">Placemakers-🔨</option>
+          <option value="Bunnings-🔨">Bunnings-🔨</option>
+          <option value="WCC-🌆 ">WCC-🌆 </option>
+          <option value="Scooterazzi-🏍️">Scooterazzi-🏍️</option>
+
+        </select>
+      </div>
+      <div class="1">
+        <label>Category Select</label>
+        <select id="category1" class="browser-default" required>
+          <option value="" disabled selected>Choose Category</option>
+          <option value="Food-🍲">Food-🍲</option>
+          <option value="House-🏠">House-🏠</option>
+          <option value="Tech-💾">Tech-💾</option>
+          <option value="Health-⚕️">Health-⚕️</option>
+          <option value="Vehicle-🚙">Vehicle-🚙</option>
+          <option value="Other-🏺">Other-🏺</option>
+        </select>
+      </div>
+      <div class="1">
+        <label>Account Select</label>
+        <select id="account1" class="browser-default">
+          <option value="" disabled selected>Choose Account</option>
+          <option value="Visa 1-💳">Visa 1-💳</option>
+          <option value="Orbit-💰">Orbit-💰</option>
+          <option value="Visa 2-💳">Visa 2-💳</option>
+          <option value="Cash-💸">Cash-💸</option>
+        </select>
+      </div>
+      <div class="1">
+        <label>Billable Select</label>
+        <select id="billable1" class="browser-default">
+          <option value="" disabled selected>Choose Billing</option>
+          <option value="No-👎">No-👎</option>
+          <option value="Part-👐">Part-👐</option>
+          <option value="Yes-👍">Yes👍</option>
+          <option value="House-🏡">House-🏡</option>
+        </select>
+      </div>
+      <div class="row">
+        <div class="input-field">
+          <input placeholder="e.g. shopping" id="comment1" type="text" class="validate">
+          <label for="comment1">Comment on Expenses</label>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+
+  <!-- SETUP forecast ITEMS for MONTH side nav -->
+  <div id="side-form-F1" class="sidenav side-form-F1">
+    <form class="add-forecast1 container section">
+      <h6>Setup Monthly Forecast forecasts</h6>
+      <div class="divider"></div>
+      <div class="input-field center">
+        <button class="btn-small">Add Forecast All</button>
+      </div>
+      <div class="1">
+        <label>All Months forcast items</label>
+        <select id="allMonth" multiple onchange="showSelOps1(this.options)" class="browser-default">
+          <option value="faN7i3PAA0c1MkocIlQk">Food 🛒 W1</option>
+          <option value="xiVKurDTkEvf9xZ2rp5u">Food 🛒 W2</option>
+          <option value="luYCrxPVyldqEHvIS03n">Food 🛒 W3</option>
+          <option value="B7l626HGLMgGJTeA3G9w">Food 🛒 W4</option>
+          <option value="NUTwEj4dVQJlxpFDalZV">Power 💡 W1</option>
+          <option value="baMctGnXW6mC4AmClBjF">Power 💡 W2</option>
+          <option value="h8liGHlH1BNNjZcujoRG">Power 💡 W3</option>
+          <option value="JaG2XJH0PdaW4YCYENEo">ASB mortguage Interest 1st W1</option>
+          <option value="S7lkqBJM9Iw8FnFXmWPC">ASB account fee 1st W1</option>
+          <option value="MCHS6MwkcSh52tZxO23s">Stuff Fibre-💻 3th W1</option>
+          <option value="7jOuw2QxDUTMCJSD5NGy">Contabo-💻 20th W3</option>
+
+          <!-- <option value="Pak'n'Save-🛒">Pak'n'Save-🛒</option>
+
+          <option value="power W4-💡">Power W4-💡</option>
+
+          <option value="Warehouse Mobile-📱">Warehouse Mobile-📱 5th W1</option> -->
+        </select>
+
+      </div>
+
+      <div class="1">
+        <label>Other Months forcast items</label>
+        <select id="elseMonth" multiple="multiple" onchange="showSelOps2(this.options)" class="browser-default"
+          size="7">
+          <!-- <option value="" disabled selected>Choose Items</option> -->
+          <option value="MCHS6MwkcSh52tZxO23s">NZRAB Reg Jun</option>
+          <option value="MjsaxOSTZ5xxaGyA0kec">WCC Rates 1/4 Feb W4</option>
+          <option value="1RibqLW3bnnlnzSKV7Ec">WCC Rates 1/4 May W4</option>
+          <option value="TGyy0fZxRb2cytSsVPXl">WCC Rates 1/4 Aug W4</option>
+          <option value="krKR3zKaUT3ECRuhOMvt">WCC Rates 1/4 Nov W4</option>
+          <option value="VC5mx2Yp0nQAy2DVU6pk">Pharmacy 1/4 Presc Sep-⚕️ W1</option>
+          <option value="lcATiaruBIHSjbRiJCsE">Pharmacy 1/4 Presc Dec-⚕️ W1</option>
+          <option value="bKsWcrTl8lR3UouCCKey">Doc 1/4 Presc Sep-⚕️ W1</option>
+          <option value="lOVwarQpmob4AhtWYGlb">Doc 1/4 Presc Dec-⚕️ W1</option>
+          <!--
+            <option value="Life Pharmacy">Pharmacy 1/4 Presc Mar-⚕️ W1 </option>
+          <option value="Life Pharmacy">Pharmacy 1/4 Presc June-⚕️ W1</option>
+          <option value="Doc prescription quarterly">Doc 1/4 Presc Mar-⚕️ W1</option>
+          <option value="Doc prescription quarterly">Doc 1/4 Presc Jun-⚕️ W1</option>
+          <option value="">Car Insurance Nov</option>
+          <option value="food W5">Food W5 🛒</option>
+          <option value="power W5-💡">Power W5-💡</option> -->
+        </select>
+
+      </div>
+    </form>
+  </div>
+
+  <!-- NEW  CREATE forecast ITEM sum side nav -->
+  <div id="side-form-F2" class="sidenav side-form-F2">
+    <form class="add-forecast2 container section">
+      <h6>Create Monthly Forecast Item</h6>
+      <div class="divider"></div>
+      <div class="input-field center">
+        <button class="btn-small">Create Single Forecast Item</button>
+      </div>
+      <div class="input-field">
+        <input placeholder=50 id="fsum" type="number" min="0" step=".01" required class="validate">
+        <!-- type="number"  min="0" step=".01"class="validate" chaged to text??/ required -->
+        <label for="sum">forecast Sum</label>
+      </div>
+      <div class="input-field">
+        <input placeholder="e.g. Food W1" id="name" type="text" class="validate" required>
+        <label for="name">Name of Forecast Item</label>
+      </div>
+      <div class="1">
+        <label>Order-which week?-1,2,3,4,5?</label>
+        <select id="order" class="browser-default" required>
+          <option value="" disabled selected>Which week?</option>
+          <option value="1">Week 1</option>
+          <option value="2">Week 2</option>
+          <option value="3">Week 3</option>
+          <option value="4">Week 4</option>
+          <option value="5">Week 5</option>
+
+        </select>
+      </div>
+
+      <div class="1">
+        <label>Category Select</label>
+        <select id="category" class="browser-default" required>
+          <option value="" disabled selected>Choose Category</option>
+          <option value="Food-🍲">Food-🍲</option>
+          <option value="House-🏠">House-🏠</option>
+          <option value="Tech-💾">Tech-💾</option>
+          <option value="Health-⚕️">Health-⚕️</option>
+          <option value="Vehicle-🚙">Vehicle-🚙</option>
+          <option value="Other-🏺">Other-🏺</option>
+        </select>
+      </div>
+      <div class="1">
+        <label>Month or multiple Selection</label>
+        <select id="month" class="browser-default" required>
+          <option value="" disabled selected>Choose Month or multiple</option>
+          <option value="all">All months</option>
+          <option value="jan">Jan</option>
+          <option value="feb">Feb</option>
+          <option value="mar">Mar</option>
+          <option value="apr">Apr</option>
+          <option value="may">May</option>
+          <option value="jun">Jun</option>
+          <option value="jul">Jul</option>
+          <option value="aug">Aug</option>
+          <option value="sep">Sep</option>
+          <option value="oct">Oct</option>
+          <option value="nov">Nov</option>
+          <option value="dec">Dec</option>
+        </select>
+      </div>
+      <div class="1">
+        <label>Due Current Month?</label>
+        <select id="current" class="browser-default" required>
+          <option value="" disabled selected>Choose If a current month item</option>
+          <option value=false>No-👎</option>
+          <option value=true>Yes👍</option>
+        </select>
+      </div>
+      <div class="1">
+        <label>Paid </label>
+        <select id="paid" class="browser-default" required>
+          <option value="" disabled selected>Choose If Paid</option>
+          <option value=false>No-👎</option>
+          <option value=true>Yes👍</option>
+        </select>
+      </div>
+    </form>
+  </div>
+
+  <!-- NEW  Clear/Reset Forecast -->
+  <div id="side-form-F3" class="sidenav side-form-F3">
+    <form class="reset-forecast container section">
+      <h6>Reset Forecasts to NULL</h6>
+      <div class="divider"></div>
+      <div class="input-field center">
+        <button class="btn-small" onclick="resetForecastx()">Reset Forecast to NULL & select next month for
+          Expenses</button>
+      </div>
+
+      <div class="1">
+        <label>Month Start</label>
+        <select id="monthEpoch" class="browser-default" required>
+          <option value="" disabled selected>Select Month</option>
+          <option value=1596240000000>Aug 2020</option>
+          <option value=1598918400000>Sep 2020</option>
+          <option value=1601510400000>Oct 2020</option>
+          <option value=1604188800000>Nov 2020</option>
+          <option value=1606780800000>Dec 2020</option>
+          <option value=1609459200000>Jan 2021</option>
+
+        </select>
+      </div>
+      <div class="input-field center">
+        <button class="btn-small" onclick="resetFcstPaidFalse()">ALL 4cast Paid=FALSE</button>
+      </div>
+      <div class="input-field center">
+        <button class="btn-small" onclick="resetFcstPaidTrue()">ALL 4cast Paid=TRUE</button>
+        <hr>
+      </div>
+      <div class="input-field center">
+        <button class="btn-small" onclick="resetFcstCurrentTrue()">ALL 4cast Current=TRUE</button>
+      </div>
+      <div class="input-field center">
+        <button class="btn-small" onclick="resetFcstCurrentFalse()">ALL 4cast Current=FALSE</button>
+      </div>
+    </form>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/db.js"></script>
+    <script src="/js/ui.js"></script>
+
+</body>
+
+</html>

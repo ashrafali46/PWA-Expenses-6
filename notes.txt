@@ -1,0 +1,44 @@
+
+
+There are jquery solutions but I want a simple vanilla JS solution first. 
+I'm using Materialize library, I don't want to move to 
+
+
+These 2 videos good for form/event handler in basic JS. 
+Javascript: Handling the SELECT onchange event (Part 1 of 2)
+https://www.youtube.com/watch?v=7O9K_ULKOzU
+JavaScript: Handling the HTML SELECT onchange event (Part 2 of 2)
+https://www.youtube.com/watch?v=1YhevTN6_NM
+
+<!doctype html>
+<html lang="en">
+Multiple selections in HTML 
+<html> 
+<head> 
+<title>MultiSelected</title> 
+<script> 
+function getSelectValues(select){ 
+    var result = []; 
+    var options = select && select.options; 
+    var opt; 
+for (var i=0, iLen = options.length; i < iLen; i++)( opt = options[i]; 
+if (opt.selected){ result.push(opt.value II opt.text); 
+} 
+} return result; // return array value 
+} 
+</script>
+ -</head> 
+E<body> 
+<select multiple> 
+<option>opt 1 text</option> 
+<option value="opt 2 value">opt 2 text</option>
+ <option value="opt 3 value">opt 3 text</option>
+  <!-- test--> 
+  </select> 
+<button onclick=" var el = documentsgetElementsByTagName('select1)[0]; 
+alert(getSelectValues(e1)); 
+">Show Select values</button> 
+
+
+
+

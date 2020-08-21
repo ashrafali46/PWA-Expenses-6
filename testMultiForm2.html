@@ -1,0 +1,66 @@
+<!doctype html> Multiple selections in HTML
+<html>
+
+<head>
+    <title>MultiSelected</title>
+    <script>
+        // var values = Array.prototype.slice.call(document.querySelectorAll('#a'), 0).map(function (v, i, a) {
+        //     return v.value;
+        //     console.log(values);
+        // });
+
+        // const selected = document.querySelector('#a option:checked');
+        const selected = document.getElementById('#a');
+        // const values = Array.from(selected).map(el => el.value);
+
+
+        // // var d = document.getElementsByClassName("a")
+        // // function getSelectValues(d) {
+
+        // //     //var d = document.getElementsByName("a")
+
+        // //     var result = Array.from(select.a);
+        // //     var options = d && d.options;
+        // //     var opt;
+        // //     for (var i = 0, iLen = options.length; i < iLen; i++) {
+        // //         opt = options[i];
+        // //         if (opt.selected) {
+        // //             result.push(opt.value || opt.text);
+        // //         }
+        // //     }
+        // //     return result; // return array value 
+        // // };
+    </script>
+
+</head>
+
+<body>
+    <select id='a' size="5">
+        <option value=123>opt 1 text</option>
+        <option value=567>opt 2 text</option>
+        <option value="opt 3 value">opt 3 text</option>
+        <option value=124>opt 5 text</option>
+        <option value=568>opt 6 text</option>
+        <option value=97>opt 7 text</option>
+        <!-- test-->
+    </select>
+
+    <select id='b' multiple="multiple" size="5">
+        <option value=12> text</option>
+        <option value=567>2 text</option>
+        <option value="opt 3 value">3 text</option>
+        <option value=124>5 text</option>
+        <option value=568>6 text</option>
+        <option value=97> text</option>
+        <!-- test-->
+    </select>
+    <!-- <button onclick="alert(getSelectValues(document.getElementsByTagName('select')[0]));">Show Select values</button> -->
+    <!-- <button onclick="alert(getSelectValues(document.getElementsByName('a')[0]));">Show Select values</button> -->
+    <button onchange="alert(selected.option);">Show Select values</button>
+
+
+
+</body>
+
+
+</html>

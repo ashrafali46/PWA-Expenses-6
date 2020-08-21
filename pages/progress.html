@@ -1,0 +1,82 @@
+<title>Progress Bar</title>
+<!--<!DOCTYPE html>
+
+<head>-->
+<link rel="stylesheet" href="http://youtube.local/assets/dcode.css">
+<link rel="shortcut icon" href="http://youtube.local/assets/favicon.ico">
+<style>
+    .progress-bar {
+        position: relative;
+        width: 300px;
+        height: 40px;
+        border: 1px solid #E100;
+    }
+
+    .progress-bar-fill {
+        height: 100%;
+        background: 11#59ea63;
+        transition: width 0.5s;
+    }
+
+    .progress-bar-value {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+
+<body>
+    <h2 id="title">Progress Bar - Web - dcode</h2>
+    <div class="progress-bar">
+        <div class="progress-bar-value">65%</div>
+        <div class="progress-bar-fill"></div>
+    </div>
+
+
+    <script type="text/javascript">
+        class ProgressBar {
+
+            constructor(element, initialValue = 0) {
+                this.valueElem = element.querySelector('.progress-bar-value');
+                this.fillElem = element.querySelector('.progress-bar-fill');
+
+                console.log(this.valueElem);
+                console.log(this.fillElem);
+                this.setValue(initialValue);
+            };
+            setValue(newValue) {
+                if (newValue < 0) {
+                    newValue = 0;
+                };
+
+                if (newValue > 100) {
+                    newValue = 100;
+                };
+
+
+                this.value = newValue;
+                this.update();
+
+
+
+            };
+            update() {
+                const percentage = this.value + '%'; // 50% 
+                this.valueElem.textContent = percentage;
+                this.fillElem.style.width = percentage;
+
+            }
+
+
+        };
+
+        const pb1 = new ProgressBar(document.querySelector('.progress-bar'));
+
+    </script>
+
+
+</body>
